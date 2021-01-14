@@ -1,6 +1,6 @@
 class Hra:
 
-    def __init__(self, strategie, zasebou):
+    def __init__(self, strategie: int, zasebou: int):
         self.strategie = strategie
         self.zasebou = zasebou
         self.pole = [None] * 20
@@ -9,11 +9,14 @@ class Hra:
 
         self.delka_pole = len(self.pole)
 
-    def set_pole(self, x, y, symbol):
-        self.pole[self.delka_pole - y - 1][x - 1] = symbol
+    def set_pole(self, x: int, y: int, symbol: str):
+        self.pole[self.delka_pole - y - 1][x] = symbol
 
-    def get_pole(self, x, y):
-        return self.pole[self.delka_pole - y - 1][x - 1]
+    def get_pole(self, x: int, y: int):
+        if x < len(self.pole) and y < len(self.pole):
+            return self.pole[self.delka_pole - y - 1][x]
+        else:
+            return None
 
     def vypis_pole(self):
         for i in range(len(self.pole)):
@@ -24,13 +27,44 @@ class Hra:
         krizku = 0
         for y in range(len(self.pole)):
             for x in range(len(self.pole[0])):
+                print(str(krizku) + "X")
+                print(str(kolecek) + "O")
                 if self.get_pole(x ,y) is not None:
                     if self.get_pole(x ,y) == "X":
-                        pass
+                        for i in range(self.zasebou):
+                            #Ve sloupci X
+                            if self.get_pole(x, y + i) == "X":
+                                krizku += 1
+                            else:
+                                krizku = 0
+                        for i in range(self.zasebou):
+                            #Za sebou X
+                            if self.get_pole(x + i, y) == "X":
+                                krizku += 1
+                            else:
+                                krizku = 0
                     else:
-                        pass
-
+                        for i in range(self.zasebou):
+                            #Ve sloupci O
+                            if self.get_pole(x, y + i) == "O":
+                                kolecek += 1
+                            else:
+                                kolecek = 0
+                        for i in range(self.zasebou):
+                            #Za sebou O
+                            if self.get_pole(x + i, y) == "O":
+                                kolecek += 1
+                            else:
+                                kolecek = 0
+                else:
+                    krizku = 0
+                    kolecek = 0
     def hraj(self):
-            self.set_pole(6, 2, "X")
+            self.set_pole(6, 2, "O")
+            self.set_pole(7, 2, "O")
+            self.set_pole(8, 2, "O")
+            self.set_pole(9, 2, "O")
+            self.set_pole(10, 2, "O")
             print(self.get_pole(6, 2))
+            self.check()
             self.vypis_pole()
