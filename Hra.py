@@ -22,87 +22,90 @@ class Hra:
         for i in range(len(self.pole)):
             print(self.pole[i])
 
-    def check(self):
-        kolecek = 0
+    def check_rows(self):
         krizku = 0
+        kolecek = 0
         for y in range(len(self.pole)):
             for x in range(len(self.pole[0])):
                 if self.get_pole(x ,y) is not None:
-                    if self.get_pole(x ,y) == "X":
-                        for i in range(self.zasebou):
-                            # Ve sloupci X
-                            if self.get_pole(x, y + i) == "X":
-                                krizku += 1
-                                if krizku == self.zasebou:
-                                    print("Křížek vyhrál")
-                            else:
-                                krizku = 0
-                        for i in range(self.zasebou):
-                            # Za sebou X
-                            if self.get_pole(x + i, y) == "X":
-                                krizku += 1
-                                if krizku == self.zasebou:
-                                    print("Křížek vyhrál")
-                            else:
-                                krizku = 0
-                        for i in range(self.zasebou):
-                            # V diagonale1 X
-                            if self.get_pole(x + i, y + i) == "X":
-                                krizku += 1
-                                if krizku == self.zasebou:
-                                    print("Křížek vyhrál")
-                            else:
-                                krizku = 0
-                        for i in range(self.zasebou):
-                            # V diagonale2 X
-                            if self.get_pole(x - i, y + i) == "X":
-                                krizku += 1
-                                if krizku == self.zasebou:
-                                    print("Křížek vyhrál")
-                            else:
-                                krizku = 0
-                    else:
-                        for i in range(self.zasebou):
-                            # Ve sloupci O
-                            if self.get_pole(x, y + i) == "O":
-                                kolecek += 1
-                                if kolecek == self.zasebou:
-                                    print("Kolečko vyhrálo")
-                            else:
-                                kolecek = 0
-                        for i in range(self.zasebou):
-                            # Za sebou O
-                            if self.get_pole(x + i, y) == "O":
-                                kolecek += 1
-                                if kolecek == self.zasebou:
-                                    print("Kolečko vyhrálo")
-                            else:
-                                kolecek = 0
-                        for i in range(self.zasebou):
-                            # V diagonale1 O
-                            if self.get_pole(x + i, y + i) == "O":
-                                kolecek += 1
-                                if kolecek == self.zasebou:
-                                    print("Kolečko vyhrálo")
-                            else:
-                                kolecek = 0
-                        for i in range(self.zasebou):
-                            # V diagonale2 O
-                            if self.get_pole(x - i, y + i) == "O":
-                                kolecek += 1
-                                if kolecek == self.zasebou:
-                                    print("Kolečko vyhrálo")
-                            else:
-                                kolecek = 0
+                    for i in range(self.zasebou):
+                        if self.get_pole(x + i, y) == "X":
+                            krizku += 1
+                            kolecek = 0
+                            if krizku == self.zasebou:
+                                print("Křížek vyhrál")
+                        else:
+                            krizku = 0
+                            kolecek += 1
+                            if kolecek == self.zasebou:
+                                print("Kolečko vyhrálo")
 
-                else:
-                    krizku = 0
-                    kolecek = 0
+    def check_columns(self):
+        krizku = 0
+        kolecek = 0
+        for y in range(len(self.pole)):
+            for x in range(len(self.pole[0])):
+                if self.get_pole(x ,y) is not None:
+                    for i in range(self.zasebou):
+                        if self.get_pole(x, y + i) == "X":
+                            krizku += 1
+                            kolecek = 0
+                            if krizku == self.zasebou:
+                                print("Křížek vyhrál")
+                        else:
+                            krizku = 0
+                            kolecek += 1
+                            if kolecek == self.zasebou:
+                                print("Kolečko vyhrálo")
+
+    def check_diagonal1(self):
+        krizku = 0
+        kolecek = 0
+        for y in range(len(self.pole)):
+            for x in range(len(self.pole[0])):
+                if self.get_pole(x, y) is not None:
+                    for i in range(self.zasebou):
+                        if self.get_pole(x + i, y + i) == "X":
+                            krizku += 1
+                            kolecek = 0
+                            if krizku == self.zasebou:
+                                print("Křížek vyhrál")
+                        else:
+                            krizku = 0
+                            kolecek += 1
+                            if kolecek == self.zasebou:
+                                print("Kolečko vyhrálo")
+
+    def check_diagonal2(self):
+        krizku = 0
+        kolecek = 0
+        for y in range(len(self.pole)):
+            for x in range(len(self.pole[0])):
+                if self.get_pole(x, y) is not None:
+                    for i in range(self.zasebou):
+                        if self.get_pole(x - i, y + i) == "X":
+                            krizku += 1
+                            kolecek = 0
+                            if krizku == self.zasebou:
+                                print("Křížek vyhrál")
+                        else:
+                            krizku = 0
+                            kolecek += 1
+                            if kolecek == self.zasebou:
+                                print("Kolečko vyhrálo")
+
+
+    def check(self):
+        self.check_rows()
+        self.check_columns()
+        self.check_diagonal1()
+        self.check_diagonal2()
+
     def hraj(self):
-            self.set_pole(6, 2, "O")
-            self.set_pole(7, 2, "O")
-            self.set_pole(8, 2, "O")
-            self.set_pole(9, 2, "O")
-            self.set_pole(10, 2, "O")
+            self.set_pole(1, 2, "X")
+            self.set_pole(2, 3, "X")
+            self.set_pole(3, 4, "X")
+            self.set_pole(4, 5, "X")
+            self.set_pole(5, 6, "X")
             self.vypis_pole()
             self.check()
