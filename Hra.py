@@ -23,76 +23,76 @@ class Hra:
             print(self.pole[i])
 
     def check_rows(self):
-        krizku = 0
-        kolecek = 0
         for y in range(len(self.pole)):
             for x in range(len(self.pole[0])):
+                krizku = 0
+                kolecek = 0
                 if self.get_pole(x ,y) is not None:
                     for i in range(self.zasebou):
                         if self.get_pole(x + i, y) == "X":
                             krizku += 1
                             kolecek = 0
                             if krizku == self.zasebou:
-                                print("Křížek vyhrál")
-                        else:
+                                return "X"
+                        elif self.get_pole(x + i, y) == "O":
                             krizku = 0
                             kolecek += 1
                             if kolecek == self.zasebou:
-                                print("Kolečko vyhrálo")
+                                return "O"
 
     def check_columns(self):
-        krizku = 0
-        kolecek = 0
         for y in range(len(self.pole)):
             for x in range(len(self.pole[0])):
+                krizku = 0
+                kolecek = 0
                 if self.get_pole(x ,y) is not None:
                     for i in range(self.zasebou):
                         if self.get_pole(x, y + i) == "X":
                             krizku += 1
                             kolecek = 0
                             if krizku == self.zasebou:
-                                print("Křížek vyhrál")
-                        else:
+                                return "X"
+                        elif self.get_pole(x, y + i) == "O":
                             krizku = 0
                             kolecek += 1
                             if kolecek == self.zasebou:
-                                print("Kolečko vyhrálo")
+                                return "O"
 
     def check_diagonal1(self):
-        krizku = 0
-        kolecek = 0
         for y in range(len(self.pole)):
             for x in range(len(self.pole[0])):
+                krizku = 0
+                kolecek = 0
                 if self.get_pole(x, y) is not None:
                     for i in range(self.zasebou):
                         if self.get_pole(x + i, y + i) == "X":
                             krizku += 1
                             kolecek = 0
                             if krizku == self.zasebou:
-                                print("Křížek vyhrál")
-                        else:
+                                return "X"
+                        elif self.get_pole(x + i, y + i) == "O":
                             krizku = 0
                             kolecek += 1
                             if kolecek == self.zasebou:
-                                print("Kolečko vyhrálo")
+                                return "O"
 
     def check_diagonal2(self):
-        krizku = 0
-        kolecek = 0
         for y in range(len(self.pole)):
             for x in range(len(self.pole[0])):
+                krizku = 0
+                kolecek = 0
                 if self.get_pole(x, y) is not None:
                     for i in range(self.zasebou):
                         if self.get_pole(x - i, y + i) == "X":
                             krizku += 1
                             kolecek = 0
                             if krizku == self.zasebou:
-                                print("Křížek vyhrál")
-                        else:
+                                return "X"
+                        elif self.get_pole(x - i, y + i) == "O":
                             krizku = 0
                             kolecek += 1
                             if kolecek == self.zasebou:
-                                print("Kolečko vyhrálo")
+                                return "O"
 
 
     def check(self):
@@ -102,10 +102,10 @@ class Hra:
         self.check_diagonal2()
 
     def hraj(self):
-            self.set_pole(1, 2, "X")
-            self.set_pole(2, 3, "X")
-            self.set_pole(3, 4, "X")
-            self.set_pole(4, 5, "X")
-            self.set_pole(5, 6, "X")
+            self.set_pole(1, 2, "O")
+            self.set_pole(2, 3, "O")
+            self.set_pole(3, 4, "O")
+            self.set_pole(4, 5, "O")
+            self.set_pole(5, 6, "O")
             self.vypis_pole()
             self.check()
