@@ -25,47 +25,48 @@ class Hra:
         for i in range(len(self.pole)):
             print(self.pole[i])
 
-    def check(self):
+    def rc(self, in_row_multiplier, in_column_multiplier):
+        """
+
+        :param in_row_multiplier:
+        :param in_column_multiplier:
+        :return: Vyherce
+        """
         for y in range(len(self.pole)):
             for x in range(len(self.pole[0])):
-                krizku = [0, 0, 0, 0]
-                kolecek = [0, 0, 0, 0]
+                krizku = 0
+                kolecek = 0
                 if self.get_pole(x, y) is not None:
                     for i in range(self.zasebou):
-                        if self.get_pole(x, y + i) == "X":
-                            krizku[0] += 1
-                            if krizku[0] == self.zasebou:
+                        if self.get_pole(x + (i * in_row_multiplier), y + (i * in_column_multiplier)) == "X":
+                            krizku += 1
+                            if krizku == self.zasebou:
                                 return "X"
-                        elif self.get_pole(x + i, y) == "X":
-                            krizku[1] += 1
-                            if krizku[1] == self.zasebou:
-                                return "X"
-                        elif self.get_pole(x + i, y + i) == "X":
-                            krizku[2] += 1
-                            if krizku[2] == self.zasebou:
-                                return "X"
-                        elif self.get_pole(x - i, y + i) == "X":
-                            krizku[3] += 1
-                            if krizku[3] == self.zasebou:
-                                return "X"
-                        elif self.get_pole(x, y + i) == "O":
-                            kolecek[0] += 1
-                            if kolecek[0] == self.zasebou:
+                        elif self.get_pole(x + (i * in_row_multiplier), y + (i * in_column_multiplier)) == "O":
+                            kolecek += 1
+                            if kolecek == self.zasebou:
                                 return "O"
-                        elif self.get_pole(x + i, y) == "O":
-                            kolecek[1] += 1
-                            if kolecek[1] == self.zasebou:
-                                return "O"
-                        elif self.get_pole(x + i, y + i) == "O":
-                            kolecek[2] += 1
-                            if kolecek[2] == self.zasebou:
-                                return "O"
-                        elif self.get_pole(x - i, y + i) == "O":
-                            kolecek[3] += 1
-                            if kolecek[3] == self.zasebou:
-                                return "O"
+        return None
+
+    def check_rows(self):
+        return self.rc(1, 0)
+
+    def check_columns(self):
+        return self.rc(0, 1)
+
+    def check_diagonal1(self):
+        return self.rc(1, 1)
+
+    def check_diagonal2(self):
+        return self.rc(-1, 1)
+
+    def check(self):
+        if self.check_rows() == self.check_columns() == self.check_diagonal1() == (self.check_diagonal2() is None):
+            return True
+        else:
+            return False
 
     def hraj(self):
-        while self.check() is None:
-            self.set_pole(int(input("corX")), int(input("corZ")), input("symbol"))
-            self.vypis_pole()
+            while self.check():
+                self.set_pole(int(input("corX")), int(input("corZ")), input("symbol"))
+                self.vypis_pole()
