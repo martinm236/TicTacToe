@@ -3,9 +3,9 @@ Tady se vytváří spouští hra
 """
 import matplotlib.pyplot as plt
 from hra import Hra
-from TicTacToe.Strategies.rucne import Rucne
-from TicTacToe.Strategies.nahodne import Nahodne
-from TicTacToe.Strategies.algoritmus import Algoritmus
+from tictactoe.strategies.rucne import Rucne
+from tictactoe.strategies.nahodne import Nahodne
+from tictactoe.strategies.algoritmus import Algoritmus
 
 r = Rucne()
 n = Nahodne()
