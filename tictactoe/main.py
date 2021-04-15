@@ -2,7 +2,7 @@
 Tady se vytváří spouští hra
 """
 import matplotlib.pyplot as plt
-from hra import Hra
+from tictactoe.hra.hra import Hra
 from tictactoe.strategies.rucne import Rucne
 from tictactoe.strategies.nahodne import Nahodne
 from tictactoe.strategies.algoritmus import Algoritmus
