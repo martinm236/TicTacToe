@@ -22,15 +22,15 @@ for obj in objs:
         O += 1
 
 labels = ['Kolečko - ' + a.jmeno, 'Křížek - ' + n.jmeno]
-hodnoty = [O, X]
+values = [O, X]
 
 
 WIDTH = 0.1
 
 fig, ax = plt.subplots()
 
-a = ax.bar(labels, hodnoty, WIDTH, label='Výhry')
-ax.bar_label(a, hodnoty)
+a = ax.bar(labels, values, WIDTH, label='Výhry')
+ax.bar_label(a, values)
 ax.set_ylabel('Výhry')
 ax.set_title('Piškvorky')
 ax.legend()
