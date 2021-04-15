@@ -2,7 +2,7 @@
 Náhodná hra
 """
 import random
-from strategy import Strategy
+from .strategy import Strategy
 
 
 class Nahodne(Strategy):

@@ -2,7 +2,7 @@
 Ruční hra
 """
 
-from strategy import Strategy
+from .strategy import Strategy
 
 
 class Rucne(Strategy):
